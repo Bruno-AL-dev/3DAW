@@ -37,13 +37,18 @@
 <header>
     <h3>Sistema de Jogo Corporativo</h3>
     <nav>
-        <a href="index.php">Gerenciar Usuários</a> | 
-        <a href="criarQuestaoME.php">Criar Pergunta (M.E.)</a> | 
-        <a href="criarQuestaoTX.php">Criar Pergunta (Texto)</a> |
-        <a href="listarQuestoes.php">Listar Perguntas</a>
+        <strong>Usuários:</strong>
+        <a href="listarUsuarios.php">Listar</a> | 
+        <a href="criarUsuario.php">Criar Novo</a>
+        <br>
+        <strong>Perguntas:</strong>
+        <a href="listarQuestoes.php">Listar</a> | 
+        <a href="criarQuestaoME.php">Criar (M.E.)</a> | 
+        <a href="criarQuestaoTX.php">Criar (Texto)</a> |
     </nav>
     <hr>
 </header>
+
 <h1>Criar Nova Pergunta - Resposta de Texto</h1>
 
 <p id="msg" style="font-weight: bold;"></p>
