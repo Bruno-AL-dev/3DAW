@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Criar Pergunta de Múltipla Escolha</title>
+    <script src="app.js"></script>
+</head>
+<body>
+<header>
+    <h3>Sistema de Jogo Corporativo</h3>
+    <nav>
+        <strong>Usuários:</strong>
+        <a href="listarUsuarios.html">Listar</a> | 
+        <a href="criarUsuario.html">Criar Novo</a>
+        <br>
+        <strong>Perguntas:</strong>
+        <a href="listarQuestoes.html">Listar</a> | 
+        <a href="criarQuestaoME.html">Criar (M.E.)</a> | 
+        <a href="criarQuestaoTX.html">Criar (Texto)</a> |
+    </nav>
+    <hr>
+</header>
+<h1>Criar Nova Pergunta - Múltipla Escolha</h1>
+
+<p id="msg" style="font-weight: bold;"></p>
+
+<form id="formPergunta">
+    <p>
+        <label for="pergunta">Texto da Pergunta:</label><br>
+        <textarea id="pergunta" name="pergunta" rows="4" cols="50"></textarea>
+    </p>
+    <p>
+        <label>Opções de Resposta (marque a opção correta):</label><br>
+        <input type="radio" name="resposta_correta" value="0"> <input type="text" name="respostas[]" size="45"><br>
+        <input type="radio" name="resposta_correta" value="1"> <input type="text" name="respostas[]" size="45"><br>
+        <input type="radio" name="resposta_correta" value="2"> <input type="text" name="respostas[]" size="45"><br>
+        <input type="radio" name="resposta_correta" value="3"> <input type="text" name="respostas[]" size="45"><br>
+        <input type="radio" name="resposta_correta" value="4"> <input type="text" name="respostas[]" size="45"><br>
+    </p>
+    <p>
+        <input type="button" value="Salvar Pergunta" onclick="salvarPerguntaME();">
+    </p>
+</form>
+</body>
+</html>

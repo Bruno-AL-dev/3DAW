@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Pergunta</title>
+    <script src="app.js"></script>
+</head>
+<body>
+<header>
+    <h3>Sistema de Jogo Corporativo</h3>
+    <nav>
+        <strong>Usuários:</strong>
+        <a href="listarUsuarios.html">Listar</a> | 
+        <a href="criarUsuario.html">Criar Novo</a>
+        <br>
+        <strong>Perguntas:</strong>
+        <a href="listarQuestoes.html">Listar</a> | 
+        <a href="criarQuestaoME.html">Criar (M.E.)</a> | 
+        <a href="criarQuestaoTX.html">Criar (Texto)</a> |
+    </nav>
+    <hr>
+</header>
+
+<h1>Editando Pergunta...</h1>
+
+<div id="msg"></div>
+
+<form id="formEdicao">
+    <input type="hidden" id="id_edit">
+    <input type="hidden" id="tipo_edit">
+    <p>
+        <label for="pergunta_edit">Texto da Pergunta:</label><br>
+        <textarea id="pergunta_edit" rows="4" cols="50"></textarea>
+    </p>
+    
+    <div id="camposME_edit" style="display: none;">
+        <p>
+            <label>Opções de Resposta:</label><br>
+            <input type="radio" name="resposta_correta_edit" value="0"> <input type="text" name="respostas_edit[]" size="45"><br>
+            <input type="radio" name="resposta_correta_edit" value="1"> <input type="text" name="respostas_edit[]" size="45"><br>
+            <input type="radio" name="resposta_correta_edit" value="2"> <input type="text" name="respostas_edit[]" size="45"><br>
+            <input type="radio" name="resposta_correta_edit" value="3"> <input type="text" name="respostas_edit[]" size="45"><br>
+            <input type="radio" name="resposta_correta_edit" value="4"> <input type="text" name="respostas_edit[]" size="45"><br>
+        </p>
+    </div>
+    <p>
+        <input type="button" value="Salvar Alterações" onclick="salvarAlteracoes();">
+    </p>
+</form>
+<br>
+<a href="listarQuestoes.html">Voltar para a lista</a>
+
+</body>
+</html>

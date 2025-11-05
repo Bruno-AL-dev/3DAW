@@ -1,7 +1,7 @@
 <?php
-// API para salvar as perguntas no Banco de Dados
+// API pra salvar as perguntas no Banco de Dados
 
-// --- 1. Adiciona a conexão com o Banco ---
+// Adiciona a conexão com o Banco
 $servidor = "localhost";
 $username = "root";
 $senha = "";
