@@ -56,6 +56,33 @@ $dadosRecebidos = json_decode(file_get_contents("php://input"), true);
 
 // Switch para decidir o que fazer com base no método
 switch ($metodo) {
+    case 'GET':
+        // Operações de Leitura (READ)
+        if ($acao == 'listarTodos') {
+            // Lista todos os alunos
+            $sql = "SELECT * FROM alunos ORDER BY nome ASC"; // Pede pra ordenar por nome
+            $resultado = $conexao->query($sql);
+            
+            $alunos = []; // Array vazio pra guardar os alunos
+            while ($linha = $resultado->fetch_assoc()) {
+                $alunos[] = $linha; // Adiciona cada aluno da linha no array
+            }
+            echo json_encode($alunos); // Retorna o array de alunos como JSON
+        
+        } elseif ($acao == 'listarUm' && $id > 0) {
+            // Lista um aluno específico
+            $sql = "SELECT * FROM alunos WHERE id = $id";
+            $resultado = $conexao->query($sql);
+            
+            if ($resultado->num_rows > 0) {
+                $aluno = $resultado->fetch_assoc();
+                echo json_encode($aluno); // Retorna o aluno encontrado
+            } else {
+                echo json_encode(['erro' => 'Aluno não encontrado']);
+            }
+        }
+        break;
+
     case 'POST':
         // Operação de Criação (CREATE)
         if ($acao == 'incluir') {

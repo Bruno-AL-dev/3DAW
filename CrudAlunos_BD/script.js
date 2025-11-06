@@ -12,13 +12,26 @@ const email = document.getElementById('email');
 // Pega os botões
 const btnSalvar = document.getElementById('btnSalvar');
 const btnLimpar = document.getElementById('btnLimpar');
+const btnListarTodos = document.getElementById('btnListarTodos');
+
+// Pega a área onde a lista de alunos será mostrada (o corpo da tabela)
+const listaAlunos = document.getElementById('listaAlunos');
 
 // Event Listeners (Gatilhos de Ação)
+// 'DOMContentLoaded' é o evento que dispara quando o HTML foi
+// completamente carregado. É o melhor momento pra carregar a lista
+document.addEventListener('DOMContentLoaded', () => {
+    listarTodosAlunos();
+});
+
 // Quando o botão "Salvar" for clicado chama a função "salvarAluno"
 btnSalvar.addEventListener('click', salvarAluno);
 
 // Quando o botão "Limpar" for clicado chama a função "limparFormulario"
 btnLimpar.addEventListener('click', limparFormulario);
+
+// Quando o botão "Atualizar Lista" for clicado chama a função "listarTodosAlunos"
+btnListarTodos.addEventListener('click', listarTodosAlunos);
 
 // Funções Principais
 // Função 1: Salvar Aluno
@@ -62,6 +75,7 @@ function incluirAluno(aluno) {
         if (resultado.status === 'sucesso') {
             alert('Aluno incluído com sucesso!');
             limparFormulario(); // Limpa os campos
+            listarTodosAlunos(); // Atualiza a tabela
         } else {
             alert('Erro ao incluir aluno: ' + resultado.mensagem);
         }
@@ -80,4 +94,54 @@ function limparFormulario() {
     nome.value = '';
     matricula.value = '';
     email.value = '';
+}
+
+/*
+    Função 3: Listar todos os alunos (READ)
+    Busca os alunos na API e exibe na tabela.
+*/
+function listarTodosAlunos() {
+    // Limpa a tabela antes de carregar novos dados
+    listaAlunos.innerHTML = '<tr><td colspan="5">Carregando...</td></tr>';
+
+    // Por padrão o "fetch" faz um GET
+    fetch(URL_API + '?acao=listarTodos')
+        .then(response => {
+            // "response.json()"" traduz a resposta JSON da API pra um array
+            return response.json();
+        })
+        .then(dados => {
+            // Se "dados", que é o array de alunos estiver vazio
+            if (dados.length === 0) {
+                listaAlunos.innerHTML = '<tr><td colspan="5">Nenhum aluno cadastrado.</td></tr>';
+            } else {
+                // Se tiver alunos, limpa a tabela
+                listaAlunos.innerHTML = '';
+                
+                // "forEach" é um loop pra passar por cada item do array "dados"
+                dados.forEach(aluno => {
+                    // Cria uma nova linha (tr) na tabela
+                    const linha = document.createElement('tr');
+                    
+                    // Adiciona as colunas (td) com os dados do aluno
+                    linha.innerHTML = `
+                        <td>${aluno.id}</td>
+                        <td>${aluno.nome}</td>
+                        <td>${aluno.matricula}</td>
+                        <td>${aluno.email}</td>
+                        <td>
+                            <button onclick="prepararEdicao(${aluno.id})">Editar</button>
+                            <button onclick="excluirAluno(${aluno.id})">Excluir</button>
+                        </td>
+                    `;
+                    // Adiciona a linha pronta no corpo da tabela (tbody)
+                    listaAlunos.appendChild(linha);
+                });
+            }
+        })
+        .catch(erro => {
+            // Se der erro na comunicação com a API
+            listaAlunos.innerHTML = '<tr><td colspan="5">Erro ao carregar a lista.</td></tr>';
+            console.error('Erro ao listar alunos:', erro);
+        });
 }
